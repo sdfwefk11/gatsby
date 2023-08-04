@@ -1,4 +1,4 @@
-import { graphql, PageProps } from "gatsby";
+import { graphql, PageProps, Link } from "gatsby";
 import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 import Layout from "../components/Layout";
@@ -13,8 +13,10 @@ export default function IndexPage({ data }: PageProps<Queries.StickersQuery>) {
             image={getImage(item.preview?.gatsbyImageData!)!}
             alt={item.name!}
           />
-          <h2>{item.name}</h2>
-          <h4>{item.price}</h4>
+          <Link to={`/products/${item.id}`}>
+            <h2>{item.name}</h2>
+            <h4>{item.price}</h4>
+          </Link>
         </article>
       ))}
     </Layout>
@@ -24,10 +26,11 @@ export const query = graphql`
   query Stickers {
     allContentfulProduct {
       nodes {
+        id
         name
         price
         preview {
-          gatsbyImageData(placeholder: BLURRED)
+          gatsbyImageData(placeholder: BLURRED, height: 250)
         }
       }
     }
