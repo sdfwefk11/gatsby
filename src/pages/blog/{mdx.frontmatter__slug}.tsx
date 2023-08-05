@@ -13,7 +13,6 @@ export default function BlogPost({ data, children }: IBlogPostProps) {
   const image = getImage(
     data.mdx?.frontmatter?.headerImage?.childImageSharp?.gatsbyImageData!
   );
-  console.log(children);
   return (
     <Layout title="">
       <GatsbyImage image={image as any} alt={data.mdx?.frontmatter?.title!} />

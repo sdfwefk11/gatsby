@@ -7,18 +7,20 @@ import Seo from "../components/Seo";
 export default function IndexPage({ data }: PageProps<Queries.StickersQuery>) {
   return (
     <Layout title="Welcome to DevStickers">
-      {data.allContentfulProduct.nodes.map((item) => (
-        <article>
-          <GatsbyImage
-            image={getImage(item.preview?.gatsbyImageData!)!}
-            alt={item.name!}
-          />
-          <Link to={`/products/${item.id}`}>
-            <h2>{item.name}</h2>
-            <h4>{item.price}</h4>
-          </Link>
-        </article>
-      ))}
+      <div className="grid">
+        {data.allContentfulProduct.nodes.map((item) => (
+          <article>
+            <GatsbyImage
+              image={getImage(item.preview?.gatsbyImageData!)!}
+              alt={item.name!}
+            />
+            <Link to={`/products/${item.id}`}>
+              <h2>{item.name}</h2>
+              <h4>{item.price}</h4>
+            </Link>
+          </article>
+        ))}
+      </div>
     </Layout>
   );
 }
